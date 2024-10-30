@@ -1,0 +1,14 @@
+location /app_name_here {
+    alias ${TEMPLATE_ROOT};
+    try_files $uri $uri/ /app_name_here/index.html;
+
+    location ~ ^/app_name_here/(api|other_routes) {
+        proxy_pass http://localhost:${TEMPLATE_PORT}; # Pick new port number
+        include /etc/nginx/sites-available/includes/common/proxy_settings.conf;
+    }
+
+    location /app_name_here/api/health {
+        proxy_pass http://localhost:${TEMPLATE_PORT}/health;
+        include /etc/nginx/sites-available/includes/common/health_check.conf;
+    }
+}

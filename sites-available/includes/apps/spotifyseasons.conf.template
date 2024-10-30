@@ -1,0 +1,14 @@
+location /spotifyseasons {
+    alias ${SPOTIFY_ROOT};
+    try_files $uri $uri/ /spotifyseasons/index.html;
+
+    location ~ ^/spotifyseasons/(auth|api|spotify|session) {
+        proxy_pass http://localhost:${SPOTIFY_PORT};
+        include /etc/nginx/sites-available/includes/common/proxy_settings.conf;
+    }
+
+    location /spotifyseasons/api/health {
+        proxy_pass http://localhost:${SPOTIFY_PORT}/health;
+        include /etc/nginx/sites-available/includes/common/health_check.conf;
+    }
+}

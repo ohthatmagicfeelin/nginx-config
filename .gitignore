@@ -1,0 +1,6 @@
+.env
+*.bak
+*.swp
+*~
+sites-available/coreyb.dev.conf
+sites-available/includes/apps/*.conf

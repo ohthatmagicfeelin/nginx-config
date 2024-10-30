@@ -1,0 +1,9 @@
+location /chatbot {
+    alias ${CHATBOT_ROOT};
+    try_files $uri $uri/ /chatbot/index.html;
+
+    location ~ ^/chatbot/api {
+        proxy_pass http://localhost:${CHATBOT_PORT};
+        include /etc/nginx/sites-available/includes/common/proxy_settings.conf;
+    }
+}

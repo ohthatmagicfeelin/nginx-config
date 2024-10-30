@@ -1,0 +1,18 @@
+server {
+    server_name ${DOMAIN} ${SERVER_IP};
+    root ${WEBSITE_ROOT};
+    index index.html;
+
+    include /etc/nginx/sites-available/includes/apps/*.conf;
+
+    location / {
+        try_files $uri $uri/ /index.html;
+    }
+
+    listen 443 ssl;
+    listen [::]:443 ssl;
+    ssl_certificate ${SSL_CERT};
+    ssl_certificate_key ${SSL_KEY};
+    include ${SSL_OPTIONS};
+    ssl_dhparam ${SSL_DHPARAM};
+}

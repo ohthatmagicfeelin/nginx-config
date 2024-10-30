@@ -1,0 +1,11 @@
+location /properties {
+    root ${PROPERTIES_ROOT};
+    index ${PROPERTIES_MAP};
+    try_files $uri $uri/ /${PROPERTIES_MAP};
+}
+
+location ~* \.(geojson)$ {
+    root ${PROPERTIES_ROOT};
+    try_files $uri =404;
+    add_header Access-Control-Allow-Origin *;
+}
