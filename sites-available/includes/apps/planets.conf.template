@@ -1,0 +1,14 @@
+location /planets {
+    alias ${PLANETS_ROOT};
+    try_files $uri $uri/ /planets/index.html;
+
+    location ~ ^/planets/(api|other_routes) {
+        proxy_pass http://localhost:${PLANETS_PORT}; # Pick new port number
+        include /etc/nginx/sites-available/includes/common/proxy_settings.conf;
+    }
+
+    location /planets/api/health {
+        proxy_pass http://localhost:${PLANETS_PORT}/health;
+        include /etc/nginx/sites-available/includes/common/health_check.conf;
+    }
+}

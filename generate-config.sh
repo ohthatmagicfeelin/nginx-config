@@ -56,4 +56,10 @@ envsubst '${PAYMENT_ROOT} ${PAYMENT_PORT}' \
     < sites-available/includes/apps/payment_template.conf.template \
     > sites-available/includes/apps/payment_template.conf
 
+
+# planets
+envsubst '${PLANETS_ROOT} ${PLANETS_PORT}' \
+    < sites-available/includes/apps/planets.conf.template \
+    > sites-available/includes/apps/planets.conf
+
 echo "Configuration files generated successfully"
