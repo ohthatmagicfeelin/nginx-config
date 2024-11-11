@@ -2,5 +2,6 @@
 *.bak
 *.swp
 *~
+.vscode
 sites-available/coreyb.dev.conf
 sites-available/includes/apps/*.conf

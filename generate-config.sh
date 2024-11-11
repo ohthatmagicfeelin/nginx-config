@@ -51,4 +51,9 @@ envsubst '${TEMPLATE_ROOT} ${TEMPLATE_PORT}' \
     < sites-available/includes/apps/app_name_here.conf.template \
     > sites-available/includes/apps/app_name_here.conf
 
+# payment_template
+envsubst '${PAYMENT_ROOT} ${PAYMENT_PORT}' \
+    < sites-available/includes/apps/payment_template.conf.template \
+    > sites-available/includes/apps/payment_template.conf
+
 echo "Configuration files generated successfully"

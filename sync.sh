@@ -20,10 +20,10 @@ SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 # Sync new configuration
 echo "Copying new configuration..."
-rsync -av \
+rsync -av --progress --stats \
     --exclude='*.template' \
     --exclude='*.example' \
-    ${SCRIPT_DIR}/sites-available/ $SERVER:$NGINX_PATH/sites-available.test/
+    "${SCRIPT_DIR}/sites-available/" $SERVER:$NGINX_PATH/sites-available/
 
 # Test new configuration on remote
 echo "Testing new configuration..."
