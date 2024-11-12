@@ -5,6 +5,8 @@ location /planets {
     location ~ ^/planets/(api|other_routes) {
         proxy_pass http://localhost:${PLANETS_PORT}; # Pick new port number
         include /etc/nginx/sites-available/includes/common/proxy_settings.conf;
+        include /etc/nginx/sites-available/includes/common/cookie_settings.conf;
+        include /etc/nginx/sites-available/includes/common/security_settings.conf;
     }
 
     location /planets/api/health {
