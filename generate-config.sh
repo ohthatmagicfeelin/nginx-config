@@ -62,4 +62,23 @@ envsubst '${PLANETS_ROOT} ${PLANETS_PORT}' \
     < sites-available/includes/apps/planets.conf.template \
     > sites-available/includes/apps/planets.conf
 
+# event
+envsubst '${EVENT_ROOT} ${EVENT_PORT}' \
+    < sites-available/includes/apps/event.conf.template \
+    > sites-available/includes/apps/event.conf
+
+# bank
+envsubst '${BANK_ROOT} ${BANK_PORT}' \
+    < sites-available/includes/apps/bank.conf.template \
+    > sites-available/includes/apps/bank.conf
+
+# listen
+envsubst '${LISTEN_ROOT} ${LISTEN_PORT}' \
+    < sites-available/includes/apps/listen.conf.template \
+    > sites-available/includes/apps/listen.conf
+
+envsubst '${CHARTER_ROOT} ${CHARTER_PORT}' \
+    < sites-available/includes/apps/charter.conf.template \
+    > sites-available/includes/apps/charter.conf
+
 echo "Configuration files generated successfully"

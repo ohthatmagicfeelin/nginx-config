@@ -1,16 +1,16 @@
-location /weather {
-    alias ${WEATHER_ROOT};
-    try_files $uri $uri/ /weather/index.html;
+location /listen {
+    alias ${LISTEN_ROOT};
+    try_files $uri $uri/ /listen/index.html;
 
-    location ~ ^/weather/(api|other_routes) {
-        proxy_pass http://localhost:${WEATHER_PORT};
+    location ~ ^/listen/(api|other_routes) {
+        proxy_pass http://localhost:${LISTEN_PORT}; # Pick new port number
         include /etc/nginx/sites-available/includes/common/proxy_settings.conf;
         include /etc/nginx/sites-available/includes/common/cookie_settings.conf;
         include /etc/nginx/sites-available/includes/common/security_settings.conf;
     }
 
-    location /weather/api/health {
-        proxy_pass http://localhost:${WEATHER_PORT}/health;
+    location /listen/api/health {
+        proxy_pass http://localhost:${LISTEN_PORT}/health;
         include /etc/nginx/sites-available/includes/common/health_check.conf;
     }
 }

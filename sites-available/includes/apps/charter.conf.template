@@ -1,16 +1,16 @@
-location /weather {
-    alias ${WEATHER_ROOT};
-    try_files $uri $uri/ /weather/index.html;
+location /charter {
+    alias ${CHARTER_ROOT};
+    try_files $uri $uri/ /charter/index.html;
 
-    location ~ ^/weather/(api|other_routes) {
-        proxy_pass http://localhost:${WEATHER_PORT};
+    location ~ ^/charter/(api|other_routes) {
+        proxy_pass http://localhost:${CHARTER_PORT};
         include /etc/nginx/sites-available/includes/common/proxy_settings.conf;
         include /etc/nginx/sites-available/includes/common/cookie_settings.conf;
         include /etc/nginx/sites-available/includes/common/security_settings.conf;
     }
 
-    location /weather/api/health {
-        proxy_pass http://localhost:${WEATHER_PORT}/health;
+    location /charter/api/health {
+        proxy_pass http://localhost:${CHARTER_PORT}/health;
         include /etc/nginx/sites-available/includes/common/health_check.conf;
     }
 }
