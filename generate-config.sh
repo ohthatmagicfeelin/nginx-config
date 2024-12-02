@@ -81,4 +81,8 @@ envsubst '${CHARTER_ROOT} ${CHARTER_PORT}' \
     < sites-available/includes/apps/charter.conf.template \
     > sites-available/includes/apps/charter.conf
 
+envsubst '${TRAVEL_ROOT} ${TRAVEL_PORT}' \
+    < sites-available/includes/apps/travel.conf.template \
+    > sites-available/includes/apps/travel.conf
+
 echo "Configuration files generated successfully"
