@@ -81,8 +81,12 @@ envsubst '${CHARTER_ROOT} ${CHARTER_PORT}' \
     < sites-available/includes/apps/charter.conf.template \
     > sites-available/includes/apps/charter.conf
 
-envsubst '${TRAVEL_ROOT} ${TRAVEL_PORT}' \
+envsubst '${TRAVEL_ROOT} ${TRAVEL_PORT} ${TRAVEL_WS_PORT}' \
     < sites-available/includes/apps/travel.conf.template \
     > sites-available/includes/apps/travel.conf
+
+envsubst '${HOUSZR_ROOT} ${HOUSZR_PORT}' \
+    < sites-available/includes/apps/houszr.conf.template \
+    > sites-available/includes/apps/houszr.conf
 
 echo "Configuration files generated successfully"

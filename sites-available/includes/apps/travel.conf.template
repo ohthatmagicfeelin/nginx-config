@@ -1,27 +1,36 @@
-location ^~ /travel/.well-known/appspecific/ {
-    alias /etc/tesla-fleet-keys/travel/;
+# Outside the /travel location block, at the same level as it
+location /.well-known/appspecific/com.tesla.3p.public-key.pem {
+    alias /etc/tesla-fleet-keys/com.tesla.3p.public-key.pem;
     add_header Content-Type application/x-pem-file;
 }
+
 location /travel {
     alias ${TRAVEL_ROOT};
     try_files $uri $uri/ /travel/index.html;
 
+    # Existing API routes
     location ~ ^/travel/(api|other_routes) {
-        proxy_pass http://localhost:${TRAVEL_PORT}; # Pick new port number
+        proxy_pass http://localhost:${TRAVEL_PORT};
         include /etc/nginx/sites-available/includes/common/proxy_settings.conf;
         include /etc/nginx/sites-available/includes/common/cookie_settings.conf;
         include /etc/nginx/sites-available/includes/common/security_settings.conf;
     }
 
+    # WebSocket for Tesla Fleet Telemetry
+    location /travel/ws {
+        proxy_pass http://localhost:${TRAVEL_WS_PORT};
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection "upgrade";
+        proxy_set_header Host $host;
+        proxy_read_timeout 3600;
+        proxy_send_timeout 3600;
+    }
+
+    # Health check
     location /travel/api/health {
         proxy_pass http://localhost:${TRAVEL_PORT}/health;
         include /etc/nginx/sites-available/includes/common/health_check.conf;
     }
 
-    # Tesla Fleet Telemetry configuration
-    location ^~ /travel/.well-known/appspecific/ {
-        # Remove /travel from alias path since parent location already handles that
-        alias ${TRAVEL_ROOT}/.well-known/appspecific/;
-        add_header Content-Type application/x-pem-file;
-    }
 }
