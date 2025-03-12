@@ -89,4 +89,12 @@ envsubst '${HOUSZR_ROOT} ${HOUSZR_PORT}' \
     < sites-available/includes/apps/houszr.conf.template \
     > sites-available/includes/apps/houszr.conf
 
+envsubst '${BILLBOARD_ROOT} ${BILLBOARD_PORT}' \
+    < sites-available/includes/apps/billboard.conf.template \
+    > sites-available/includes/apps/billboard.conf
+
+envsubst '${GROOVER_ROOT} ${GROOVER_PORT}' \
+    < sites-available/includes/apps/groover.conf.template \
+    > sites-available/includes/apps/groover.conf
+
 echo "Configuration files generated successfully"

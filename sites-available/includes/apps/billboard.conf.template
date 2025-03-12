@@ -1,0 +1,16 @@
+location /billboard {
+    alias ${BILLBOARD_ROOT};
+    try_files $uri $uri/ /billboard/index.html;
+
+    location ~ ^/billboard/(api|other_routes) {
+        proxy_pass http://localhost:${BILLBOARD_PORT}; # Pick new port number
+        include /etc/nginx/sites-available/includes/common/proxy_settings.conf;
+        include /etc/nginx/sites-available/includes/common/cookie_settings.conf;
+        include /etc/nginx/sites-available/includes/common/security_settings.conf;
+    }
+
+    location /billboard/api/health {
+        proxy_pass http://localhost:${BILLBOARD_PORT}/health;
+        include /etc/nginx/sites-available/includes/common/health_check.conf;
+    }
+}
