@@ -53,22 +53,4 @@ create_symlink "$ONEDRIVE_PATH/.vscode/settings.json" "$REPO_PATH/.vscode/settin
 # Root .env file
 create_symlink "$ONEDRIVE_PATH/.env" "$REPO_PATH/.env"
 
-# Sites available directory and its contents
-# First, create the sites-available directory if it doesn't exist
-mkdir -p "$REPO_PATH/sites-available/includes/apps"
-
-# Create symlinks for all files in sites-available
-for file in "$ONEDRIVE_PATH/sites-available"/*; do
-    if [ -f "$file" ]; then
-        create_symlink "$file" "$REPO_PATH/sites-available/$(basename "$file")"
-    fi
-done
-
-# Create symlinks for all files in sites-available/includes/apps
-for file in "$ONEDRIVE_PATH/sites-available/includes/apps"/*; do
-    if [ -f "$file" ]; then
-        create_symlink "$file" "$REPO_PATH/sites-available/includes/apps/$(basename "$file")"
-    fi
-done
-
 echo "Symlink setup complete!"
