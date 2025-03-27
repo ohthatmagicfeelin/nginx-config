@@ -97,4 +97,8 @@ envsubst '${GROOVER_ROOT} ${GROOVER_PORT}' \
     < sites-available/includes/apps/groover.conf.template \
     > sites-available/includes/apps/groover.conf
 
+envsubst '${ARCHIVE_ROOT} ${ARCHIVE_PORT}' \
+    < sites-available/includes/apps/archive.conf.template \
+    > sites-available/includes/apps/archive.conf
+
 echo "Configuration files generated successfully"
