@@ -1,0 +1,16 @@
+location /template {
+    alias ${TEMPLATE_ROOT};
+    try_files $uri $uri/ /template/index.html;
+
+    location ~ ^/template/(api|other_routes) {
+        proxy_pass http://localhost:${TEMPLATE_PORT}; # Pick new port number
+        include /etc/nginx/sites-available/includes/common/proxy_settings.conf;
+        include /etc/nginx/sites-available/includes/common/cookie_settings.conf;
+        include /etc/nginx/sites-available/includes/common/security_settings.conf;
+    }
+
+    location /template/api/health {
+        proxy_pass http://localhost:${TEMPLATE_PORT}/health;
+        include /etc/nginx/sites-available/includes/common/health_check.conf;
+    }
+}

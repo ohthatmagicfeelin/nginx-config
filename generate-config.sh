@@ -46,15 +46,11 @@ envsubst '${CHATBOT_ROOT} ${CHATBOT_PORT}' \
     < sites-available/includes/apps/chatbot.conf.template \
     > sites-available/includes/apps/chatbot.conf
 
-# app_name_here
-envsubst '${TEMPLATE_ROOT} ${TEMPLATE_PORT}' \
-    < sites-available/includes/apps/app_name_here.conf.template \
-    > sites-available/includes/apps/app_name_here.conf
 
-# payment_template
-envsubst '${PAYMENT_ROOT} ${PAYMENT_PORT}' \
-    < sites-available/includes/apps/payment_template.conf.template \
-    > sites-available/includes/apps/payment_template.conf
+# template
+envsubst '${TEMPLATE_ROOT} ${TEMPLATE_PORT}' \
+    < sites-available/includes/apps/template.conf.template \
+    > sites-available/includes/apps/template.conf
 
 
 # planets
@@ -100,5 +96,9 @@ envsubst '${GROOVER_ROOT} ${GROOVER_PORT}' \
 envsubst '${ARCHIVE_ROOT} ${ARCHIVE_PORT}' \
     < sites-available/includes/apps/archive.conf.template \
     > sites-available/includes/apps/archive.conf
+
+envsubst '${SEASONZ_ROOT} ${SEASONZ_PORT}' \
+    < sites-available/includes/apps/seasonz.conf.template \
+    > sites-available/includes/apps/seasonz.conf
 
 echo "Configuration files generated successfully"

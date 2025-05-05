@@ -3,6 +3,7 @@ location /archive {
     try_files $uri $uri/ /archive/index.html;
 
     location ~ ^/archive/(api|other_routes) {
+        client_max_body_size 50M;
         proxy_pass http://localhost:${ARCHIVE_PORT}; # Pick new port number
         include /etc/nginx/sites-available/includes/common/proxy_settings.conf;
         include /etc/nginx/sites-available/includes/common/cookie_settings.conf;
